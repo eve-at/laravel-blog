@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('posts', [
         //'posts' => Post::all()
-        'posts' => Post::latest('published_at')->with(['category', 'author'])->get()
+        'posts' => Post::latest('published_at')->get()
     ]);  
 });
 
@@ -31,18 +31,20 @@ Route::get('/posts/{post:slug}', function (Post $post) {
 
 Route::get('/categories/{category:slug}', function (Category $category) {
     return view('posts', [
-        'posts' => Post::latest('published_at')
+        'posts' => $category->posts
+        /*'posts' => Post::latest('published_at')
                         ->with(['category', 'author'])
                         ->where('category_id', $category->id)
-                        ->get()
+                        ->get()*/
     ]);
 });
 
 Route::get('/authors/{author:username}', function (User $author) {
     return view('posts', [
-        'posts' => Post::latest('published_at')
+        'posts' => $author->posts
+        /*'posts' => Post::latest('published_at')
                     ->with(['category', 'author'])
                     ->where('user_id', $author->id)
-                    ->get()
+                    ->get()*/
     ]);
 });
