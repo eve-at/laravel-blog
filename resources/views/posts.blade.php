@@ -15,7 +15,7 @@
             <div class="lg:grid lg:grid-cols-6">
                 @foreach($posts->skip(1) as $post)
                     @include('components.post-card', [
-                        'article' => $post,
+                        'post' => $post,
                         'class' => $loop->iteration < 3 ? 'col-span-3' : 'col-span-2'
                     ])
                 @endforeach
