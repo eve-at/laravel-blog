@@ -27,6 +27,7 @@ class PostFactory extends Factory
             'slug' => Str::of($title)->slug('-'),
             'excerpt' => fake()->text(rand(100, 150)),
             'body' => '<p>' . implode('</p><p>', fake()->paragraphs(rand(2, 5))) . '</p>',
+            'published_at' => now(),
         ];
     }
 }
