@@ -11,21 +11,30 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+
+    private static $userCount = 3;
+    private static $categoryCount = 5;
+    private static $postCountPerUserPerCategory = 5;
+
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
-        $userCount = 3;
-        $categoryCount = 5;
-        $postCount = 15;
-     
         Post::truncate();
         Category::truncate();
         User::truncate();
 
-        User::factory($userCount)->create();
-        Category::factory($categoryCount)->create();
-        Post::factory($postCount)->create();
+        $users = User::factory(static::$userCount)->create();
+        $categories = Category::factory(static::$categoryCount)->create();
+
+        $users->each(function ($user) use ($categories) {
+            $categories->each(function ($category) use ($user) {
+                Post::factory(static::$postCountPerUserPerCategory)->create([
+                    'user_id' => $user->id,
+                    'category_id' => $category->id,
+                ]);
+            });
+        });        
     }
 }
