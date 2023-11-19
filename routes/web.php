@@ -38,11 +38,11 @@ Route::get('/categories/{category:slug}', function (Category $category) {
     ]);
 });
 
-Route::get('/authors/{user}', function (User $user) {
+Route::get('/authors/{author:username}', function (User $author) {
     return view('posts', [
         'posts' => Post::latest('published_at')
                     ->with(['category', 'author'])
-                    ->where('user_id', $user->id)
+                    ->where('user_id', $author->id)
                     ->get()
     ]);
 });
