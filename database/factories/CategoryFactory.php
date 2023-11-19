@@ -19,7 +19,7 @@ class CategoryFactory extends Factory
     {
         $name = fake()->word();
         return [
-            'name' => $name,
+            'name' => ucfirst($name),
             'slug' => Str::of($name)->slug('-'),
         ];
     }
