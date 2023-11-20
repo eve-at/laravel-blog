@@ -25,8 +25,8 @@ class PostFactory extends Factory
             'user_id' => User::inRandomOrder()->first(),
             'title' => $title,
             'slug' => Str::of($title)->slug('-'),
-            'excerpt' => fake()->text(rand(100, 150)),
-            'body' => '<p>' . implode('</p><p>', fake()->paragraphs(rand(2, 5))) . '</p>',
+            'excerpt' => '<p>' . implode('</p><p>', fake()->paragraphs(2)) . '</p>',
+            'body' => '<p>' . implode('</p><p>', fake()->paragraphs(rand(5, 10))) . '</p>',
             'published_at' => now(),
         ];
     }
