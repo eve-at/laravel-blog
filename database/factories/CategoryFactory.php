@@ -17,7 +17,7 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
-        $name = fake()->word();
+        $name = fake()->unique()->word();
         return [
             'name' => ucfirst($name),
             'slug' => Str::of($name)->slug('-'),

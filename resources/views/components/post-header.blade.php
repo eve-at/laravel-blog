@@ -3,12 +3,7 @@
         Latest <span class="text-blue-500">Blog</span> News
     </h1>
 
-    <p class="text-sm mt-14">
-        Another year. Another update. We're refreshing the popular Laravel series with new content.
-        I'm going to keep you guys up to speed with what's going on!
-    </p>
-
-    <div class="space-y-2 lg:space-y-0 lg:space-x-4 mt-8">
+    <div class="space-y-2 lg:space-y-0 lg:space-x-4 mt-4">
         <!--  Category -->
         <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
 
@@ -28,7 +23,7 @@
                     </svg>
                 </button>
 
-                <div x-show="show" class="py-2 absolute bg-gray-100 w-32 mt-2 rounded-xl z-50" style="display: none;">
+                <div x-show="show" class="py-2 absolute bg-gray-100 w-32 mt-2 rounded-xl z-50 overflow-auto max-h-52" style="display: none;">
                     <a href="/" 
                         class="block text-left px-3 text-sm leading-6 hover:bg-gray-300 focus:bg-gray-300"
                     >
@@ -47,7 +42,7 @@
         </div>
 
         <!-- Other Filters -->
-        <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
+        {{-- <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
             <select class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold">
                 <option value="category" disabled selected>Other Filters</option>
                 <option value="foo">Foo</option>
@@ -63,7 +58,7 @@
                         d="M13.854 7.224l-3.847 3.856 3.847 3.856-1.184 1.184-5.04-5.04 5.04-5.04z"></path>
                 </g>
             </svg>
-        </div>
+        </div> --}}
 
         <!-- Search -->
         <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl px-3 py-2">
