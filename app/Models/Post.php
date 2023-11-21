@@ -23,7 +23,15 @@ class Post extends Model
         $query->when($filters['search'] ?? false, fn ($query, $search) =>
             $query->where('title', 'like', '%' . trim($search) . '%')
             ->orWhere('excerpt', 'like', '%' . trim($search) . '%')
-            ->orWhere('body', 'like', '%' . trim($search) . '%'));        
+            ->orWhere('body', 'like', '%' . trim($search) . '%'));   
+            
+        $query->when($filters['category'] ?? false, fn ($query, $category) => 
+            $query->whereExists(fn ($query) => 
+                $query->from('categories')
+                    ->whereColumn('categories.id', 'posts.category_id')
+                    ->where('categories.slug', $category)
+            )
+        );
     }
 
     public function category()
