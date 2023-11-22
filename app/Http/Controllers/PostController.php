@@ -10,8 +10,11 @@ class PostController extends Controller
 {
     public function index() 
     {
-        return view('posts', [
-            'posts' => Post::latest('published_at')->filter(request(['search', 'category', 'author']))->get(),
+        return view('posts.posts', [
+            'posts' => Post::latest('published_at')
+                ->filter(request(['search', 'category', 'author']))
+                ->paginate(6)
+                ->withQueryString(),
             'categories' => Category::orderBy('name')->get(),
             'currentCategory' => Category::where('slug', request('category'))->first()
         ]);  
@@ -19,7 +22,7 @@ class PostController extends Controller
 
     public function show(Post $post) 
     {
-        return view('post', [
+        return view('posts.post', [
             'post' => $post,
         ]);
     }

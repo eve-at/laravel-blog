@@ -8,7 +8,7 @@
             <p class="text-center">No posts yet. Please comme back later</p> 
         @else
             @include('components.post-card', [
-                'article' => $posts[0],
+                'post' => $posts->first(),
                 'isMain' => true,
             ])
 
@@ -20,6 +20,8 @@
                     ])
                 @endforeach
             </div>
+
+            {{ $posts->links() }}
         @endif
     </main>
 @endsection
