@@ -55,4 +55,6 @@
             </div>
         </footer>
     </section>
+
+    @include('components.flash')
 </body>
