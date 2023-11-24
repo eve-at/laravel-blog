@@ -10,7 +10,7 @@ class PostController extends Controller
 {
     public function index() 
     {
-        return view('posts.posts', [
+        return view('posts.index', [
             'posts' => Post::latest('published_at')
                 ->filter(request(['search', 'category', 'author']))
                 ->paginate(6)
@@ -22,7 +22,7 @@ class PostController extends Controller
 
     public function show(Post $post) 
     {
-        return view('posts.post', [
+        return view('posts.show', [
             'post' => $post,
         ]);
     }
