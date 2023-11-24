@@ -12,7 +12,7 @@ class Post extends Model
     protected $guarded = ['id'];
     //protected $fillable = ['title', 'excerpt', 'body'];
 
-    protected $with = ['category', 'author'];
+    protected $with = ['category', 'author', 'comments'];
 
     protected $casts = [
         'published_at' => 'datetime:Y-m-d',
@@ -50,5 +50,10 @@ class Post extends Model
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

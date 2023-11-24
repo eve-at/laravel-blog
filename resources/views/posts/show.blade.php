@@ -11,7 +11,7 @@
                 </p>
 
                 <div class="flex items-center lg:justify-center text-sm mt-4">
-                    <img src="/images/avatar.jpg" width="60" height="60" alt="{{ $post->author->username }} avatar">
+                    <img src="https://i.pravatar.cc/60?u={{ $post->author->id }}" class="rounded-xl" width="60" height="60" alt="{{ $post->author->username }} avatar">
                     <div class="ml-3 text-left">
                         <h5 class="font-bold">
                             <a href="/?author={{ $post->author->username }}">{{ $post->author->name }}</a>
@@ -52,7 +52,14 @@
                     {!! $post->body !!}
                 </div>
             </div>
+
+            <section class="col-span-8 col-start-5 mt-10 space-y-6">
+                @foreach ($post->comments as $comment)
+                    @include('components.post-comment', ['comment' => $comment])
+                @endforeach
+
+                @include('posts._comment-form', ['post' => $post])
+            </section>
         </article>
     </main>
 @endsection
-

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -12,7 +13,7 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
 
-    private static $userCount = 3;
+    private static $userCount = 20;
     private static $categoryCount = 5;
     private static $postCountPerUserPerCategory = 5;
 
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        Comment::truncate();
         Post::truncate();
         Category::truncate();
         User::truncate();
@@ -36,5 +38,11 @@ class DatabaseSeeder extends Seeder
                 ]);
             });
         });        
+
+        Post::all()->each(function ($post) {
+            Comment::factory(rand(0, 5))->create([
+                'post_id' => $post->id
+            ]);
+        });
     }
 }
