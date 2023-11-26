@@ -20,9 +20,12 @@ use Illuminate\Validation\ValidationException;
 */
 
 Route::get('/', [PostController::class, 'index'])->name('home');
-Route::get('/posts/{post:slug}', [PostController::class, 'show']);
 
+Route::get('/posts/{post:slug}', [PostController::class, 'show']);
 Route::post('/posts/{post:slug}/comment', [CommentController::class, 'store'])->middleware('auth');
+
+Route::get('/admin/post/create', [PostController::class, 'create'])->middleware('admin');
+Route::post('/admin/post/store', [PostController::class, 'store'])->middleware('admin');
 
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
 Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
