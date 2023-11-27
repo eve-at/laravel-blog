@@ -9,6 +9,7 @@ use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Filesystem\Filesystem;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,6 +28,12 @@ class DatabaseSeeder extends Seeder
         Category::truncate();
         User::truncate();
 
+        $file = new Filesystem;
+        $file->cleanDirectory('storage/app/public/images');
+        for($i = 1; $i < 6; $i++) {
+            $file->copy("public/images/image{$i}.jpg", "storage/app/public/images/image{$i}.jpg");
+        }
+
         $users = User::factory(static::$userCount)->create();
         $categories = Category::factory(static::$categoryCount)->create();
 
@@ -41,7 +48,7 @@ class DatabaseSeeder extends Seeder
 
         Post::all()->each(function ($post) {
             Comment::factory(rand(0, 5))->create([
-                'post_id' => $post->id
+                'post_id' => $post->id,
             ]);
         });
     }

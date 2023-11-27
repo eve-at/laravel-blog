@@ -38,18 +38,20 @@ class PostController extends Controller
     public function store() 
     {
         $attributes = request()->validate([
-            'title'   => ['required', 'min:20', 'max:255'],
-            'slug'    => ['required', 'min:20', 'max:255', Rule::unique('posts', 'slug')],
-            'excerpt' => ['required', 'max:255'],
-            'body'    => ['required'],
+            'title'     => ['required', 'min:20', 'max:255'],
+            'slug'      => ['required', 'min:20', 'max:255', Rule::unique('posts', 'slug')],
+            'thumbnail' => ['required', 'image'],
+            'excerpt'   => ['required', 'max:255'],
+            'body'      => ['required'],
             'category_id' => ['required', Rule::exists('categories', 'id')],
         ]);
 
         $attributes['user_id'] = auth()->id();
         $attributes['published_at'] = now();
+        $attributes['thumbnail'] = request()->file('thumbnail')->store('images');
 
         Post::create($attributes);
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Post was successfully created');
     }
 }

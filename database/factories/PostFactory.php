@@ -25,6 +25,7 @@ class PostFactory extends Factory
             'user_id' => User::inRandomOrder()->first(),
             'title' => $title,
             'slug' => Str::of($title)->slug('-'),
+            'thumbnail' => 'images/image' . rand(1, 5) . '.jpg', // added in DB seeder
             'excerpt' => '<p>' . implode('</p><p>', fake()->paragraphs(2)) . '</p>',
             'body' => '<p>' . implode('</p><p>', fake()->paragraphs(rand(5, 10))) . '</p>',
             'published_at' => fake()->dateTimeThisYear(),

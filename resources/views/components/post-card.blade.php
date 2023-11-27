@@ -10,7 +10,7 @@
         <div class="py-6 px-5 {{ $isMain ? 'lg:flex' : '' }}">
             <div class="{{ $isMain ? 'flex-1 lg:mr-8' : '' }}">
                 <a href="/posts/{{ $post->slug }}">
-                    <img src="/images/image{{ rand(1, 5) }}.jpg" alt="Blog Post illustration" class="rounded-xl">
+                    <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="Blog Post illustration" class="rounded-xl">
                 </a>
             </div>
 

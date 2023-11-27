@@ -15,8 +15,14 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (! auth()->user()?->admin) {
+        // user must log in first
+        if (! auth()->user()) {
             return redirect()->route('login');
+        }
+
+        // user have no admin rights
+        if (! auth()->user()?->admin) {
+            abort(Response::HTTP_FORBIDDEN);
         }
 
         return $next($request);
