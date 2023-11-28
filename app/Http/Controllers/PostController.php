@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -28,30 +27,5 @@ class PostController extends Controller
         return view('posts.show', [
             'post' => $post,
         ]);
-    }
-
-    public function create() 
-    {
-        return view('posts.create');
-    }
-
-    public function store() 
-    {
-        $attributes = request()->validate([
-            'title'     => ['required', 'min:20', 'max:255'],
-            'slug'      => ['required', 'min:20', 'max:255', Rule::unique('posts', 'slug')],
-            'thumbnail' => ['required', 'image'],
-            'excerpt'   => ['required', 'max:255'],
-            'body'      => ['required'],
-            'category_id' => ['required', Rule::exists('categories', 'id')],
-        ]);
-
-        $attributes['user_id'] = auth()->id();
-        $attributes['published_at'] = now();
-        $attributes['thumbnail'] = request()->file('thumbnail')->store('images');
-
-        Post::create($attributes);
-
-        return redirect('/')->with('success', 'Post was successfully created');
     }
 }

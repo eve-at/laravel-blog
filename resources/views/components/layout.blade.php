@@ -1,6 +1,7 @@
 <!doctype html>
 
 <title>My Blog</title>
+<meta name="robots" content="noindex,nofollow">
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link rel="stylesheet" href="/app.css">
@@ -29,6 +30,15 @@
                 @else
                     <span class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}</span>
                     
+                    @if(auth()->user()?->admin)
+                        <a href="{{ route('adminPosts')}}">
+                            <span class="text-xs font-semibold text-blue-500 ml-6">Posts</span>
+                        </a>
+                        <a href="{{ route('addPost')}}">
+                            <span class="text-xs font-semibold text-blue-500 ml-6">New Post</span>
+                        </a>
+                    @endif
+
                     <form method="POST" action="/logout" class="text-xs font-semibold text-blue-500 ml-6">
                         @csrf
                         <button type="submit">Log Out</button>

@@ -2,14 +2,14 @@
 
 @section('content')
     <main class="max-w-lg mx-auto mt-10 bg-gray-100 border border-gray-200 p-6 rounded-xl">
-        <h1 class="text-center font-bold text-xl">Create a post</h1>
+        <h1 class="text-center font-bold text-xl">Manage post</h1>
 
         <form action="/admin/post/store" method="POST" class="mt-10" enctype="multipart/form-data">
             @csrf
 
             <x-form.input name="title" />
             <x-form.input name="slug" />
-            <x-form.file name="thumbnail" />
+            <x-form.file name="thumbnail" required="required" />
 
             <x-form.container>
                 <x-form.title name="category" />

@@ -7,7 +7,7 @@
         class="border border-gray-400 p-2 w-full" 
         name="{{ $name }}"
         id="{{ $name }}"
-        required
+        {{ $attributes }}
     >
 
     <x-form.error name="{{ $name }}" />
